@@ -4,6 +4,8 @@ const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const compression = require("compression");
+const auth = require("./routes/authRoutes");
+const user = require("./routes/userRoutes");
 
 dotenv.config();
 
@@ -34,8 +36,8 @@ app.use((req, res, next) => {
 });
 
 app.get("/", (req, res, next) => res.send("Hello world !!!"));
-app.use("/api/auth", require("./routes/authRoutes"));
-app.use("/api/user", require("./routes/userRoutes"));
+app.use("/api/auth", auth);
+app.use("/api/user", user);
 
 // connect to database
 mongoose
@@ -44,3 +46,5 @@ mongoose
   .catch((err) => console.log(err));
 
 app.listen(process.env.PORT || 4000, () => console.log("server started"));
+
+module.exports = app;
