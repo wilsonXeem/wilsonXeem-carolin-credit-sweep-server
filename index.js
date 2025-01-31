@@ -45,7 +45,9 @@ app.use("/api/user", async (req, res) => {
 
 // connect to database
 mongoose
-  .connect(process.env.MONGODB_URI)
+  .connect(
+    "mongodb+srv://carolinacreditsweep:fWthuc7PPezxmxzt@cluster0.ifol3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+  )
   .then(() => console.log("database connect successfully"))
   .catch((err) => console.log(err));
 
