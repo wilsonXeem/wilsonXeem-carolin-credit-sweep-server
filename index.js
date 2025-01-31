@@ -6,6 +6,7 @@ const cors = require("cors");
 const compression = require("compression");
 const auth = require("./routes/authRoutes");
 const user = require("./routes/userRoutes");
+const Users = require("./models/User");
 
 dotenv.config();
 
@@ -37,7 +38,10 @@ app.use((req, res, next) => {
 
 app.get("/", (req, res, next) => res.send("Hello world !!!"));
 app.use("/api/auth", auth);
-app.use("/api/user", user);
+app.use("/api/user", async (req, res) => {
+  const users = await Users.find();
+  res.send(users);
+});
 
 // connect to database
 mongoose
